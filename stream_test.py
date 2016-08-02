@@ -1,7 +1,7 @@
 import cv2
 
-#cap = cv2.VideoCapture("rtsp://crtlabs:Abudabu1!@430n.crtlabs.org:554/videoMain")
-cap = cv2.VideoCapture("flow.mp4")
+cap = cv2.VideoCapture("rtsp://crtlabs:Abudabu1!@430n.crtlabs.org:554/videoMain")
+#cap = cv2.VideoCapture("flow.mp4")
 while(1):
 	ret, frame = cap.read()
 	if ret == True:
