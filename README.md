@@ -1,5 +1,5 @@
 # Vehicle_Counting
-
+    Using OpenCV to detect and count moving vehicles.
 # Main steps of the image processing:
     1.Read the video frame by frame.
   
@@ -17,12 +17,10 @@
 
 Simply run main_fei_dybg.py.
 
-Using OpenCV lib to detect and track vehicles. 
-
 ...
 
 Problems:
 
-1. Frame rate.
+    1. Frame rate might be a problem.
 
-2. Streaming from cam.
+    2. Could not read the RTSP stream.
