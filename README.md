@@ -1,0 +1,3 @@
+# VehicleCounting
+using OpenCV to count vehicles
+Problems: 1.Read video from rtsp. 2.Frame rate. 3....
