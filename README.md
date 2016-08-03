@@ -19,6 +19,8 @@ Simply run main_fei_dybg.py.
 
 ...
 
+Camshift is not good for tracking vehicle due to the sunlight is too strong at day time.
+
 Problems:
 
     1. Frame rate might be a problem.
