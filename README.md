@@ -57,6 +57,8 @@ You definetly could install OpenCV from source, but it will be more complicated.
   5. If you can't import cv2, try
     `ln -s -f /usr/local/Cellar/opencv/2.4.12/lib/python2.7/site-packages/cv2.so /usr/local/lib/python2.7/site-packages/cv2.so`
 
+    you may need `sudo`
+
 # Main steps of the image processing:
 
   1.Read the video frame by frame.
