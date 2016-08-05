@@ -6,12 +6,50 @@ Using OpenCV to detect and count moving vehicles.
 
 You definetly could install OpenCV from source, but it will be more complicated. Using homebrew is a seay way to go.
 
-  1. Install homebrew(if you don't have it)
+  1. Install homebrew (if you don't have it)
 
     `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
     
     or you could find it [here](http://brew.sh)
+    
+  2. Install Python
+    
+    `brew install python`
+    
+    Open up the `~/.bash_profile` file (if it does not exist, create it), and append the following
 
+    lines to the file:
+    
+    `# Homebrew`
+    `export PATH=/usr/local/bin:$PATH`
+
+    after that, use `which python` to detect the path of current Python
+
+    if the output is `/usr/local/bin/python` , then you are indeed using the Homebrew version of Python. And if your output
+    
+    is `/usr/bin/python` , then you are still using the system version of Python.
+    
+    
+    
+    actually I think it is OK to use system Python.
+    
+  3. Install numpy
+  
+    `brew install numpy`
+    
+    then link numpy
+
+    `brew link numpy` 
+    
+  4. Install OpenCV 3
+  
+    `brew tap homebrew/science`
+
+    `brew install opencv3 --with-contrib --with-ffmpeg --with-tbb`
+    
+    it is important to add the option `--with-ffmpeg --with-tbb` for decoding some format of video
+    
+    
 # Main steps of the image processing:
 
     1.Read the video frame by frame.
