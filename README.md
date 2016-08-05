@@ -2,7 +2,9 @@
 
 Using OpenCV to detect and count moving vehicles.
 
-# Prepare(for OS X)
+# Prepare(install OpenCV for OS X)
+
+You definetly could install OpenCV from source, but more complicated, use homebrew is a seay way to go.
 
 1. Install homebrew(if you don't have it)
 
