@@ -5,7 +5,9 @@ Using OpenCV to detect and count moving vehicles.
 # Prepare(for OS X)
 
 1. Install homebrew(if you don't have it)
+
     `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+    
     or you could find it [here](http://brew.sh)
 
 # Main steps of the image processing:
