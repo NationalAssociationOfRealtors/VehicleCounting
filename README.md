@@ -20,9 +20,7 @@ You definetly could install OpenCV from source, but it will be more complicated.
 
     lines to the file:
     
-    `# Homebrew`
-    
-    `export PATH=/usr/local/bin:$PATH`
+    `export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH`
 
     after that, use `which python` to detect the path of current Python
 
