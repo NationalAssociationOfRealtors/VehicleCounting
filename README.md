@@ -1,6 +1,7 @@
 # Vehicle_Counting
     Using OpenCV to detect and count moving vehicles.
 # Main steps of the image processing:
+
     1.Read the video frame by frame.
   
     2.Apply some fileters to the frame(dilation, etc.).
