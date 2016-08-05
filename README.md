@@ -4,13 +4,13 @@ Using OpenCV to detect and count moving vehicles.
 
 # Prepare(install OpenCV for OS X)
 
-You definetly could install OpenCV from source, but more complicated, use homebrew is a seay way to go.
+You definetly could install OpenCV from source, but it will be more complicated. Using homebrew is a seay way to go.
 
-1. Install homebrew(if you don't have it)
+    1. Install homebrew(if you don't have it)
 
-    `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+        `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
     
-    or you could find it [here](http://brew.sh)
+        or you could find it [here](http://brew.sh)
 
 # Main steps of the image processing:
 
