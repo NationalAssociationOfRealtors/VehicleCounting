@@ -12,7 +12,7 @@ You definetly could install OpenCV from source, but it will be more complicated.
     
     or you could find it [here](http://brew.sh)
     
-  2. Install Python
+  2. Install Python (if you'd like to use system Python, skip this step)
     
     `brew install python`
     
@@ -46,14 +46,17 @@ You definetly could install OpenCV from source, but it will be more complicated.
     
     it is important to add the option `--with-ffmpeg --with-tbb` for decoding some format of video
     
-    then set up Python with OpenCV
+    then set up Python with OpenCV (if you use the system version of Python)
     
     `cd /Library/Python/2.7/site-packages/`
     
     `ln -s /usr/local/Cellar/opencv3/3.1.0_3/lib/python2.7/site-packages/cv2.so cv2.so` (you may need `sudo`)
     
     Then it's done!(I'm not sure if there are useless steps here, if so I'll update it)
-    
+  
+  5. If you can't import cv2, try
+    `ln -s -f /usr/local/Cellar/opencv/2.4.12/lib/python2.7/site-packages/cv2.so /usr/local/lib/python2.7/site-packages/cv2.so`
+
 # Main steps of the image processing:
 
   1.Read the video frame by frame.
