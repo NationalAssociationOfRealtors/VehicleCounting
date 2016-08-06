@@ -55,7 +55,7 @@ You definetly could install OpenCV from source, but it will be more complicated.
     Then it's done!(I'm not sure if there are useless steps here, if so I'll update it)
   
   5. If you can't import cv2, try
-    `ln -s -f /usr/local/Cellar/opencv/2.4.12/lib/python2.7/site-packages/cv2.so /usr/local/lib/python2.7/site-packages/cv2.so`
+    `ln -s -f /usr/local/Cellar/opencv/2.4.13/lib/python2.7/site-packages/cv2.so /usr/local/lib/python2.7/site-packages/cv2.so`
 
     you may need `sudo`
 
