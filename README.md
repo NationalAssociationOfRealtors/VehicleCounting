@@ -85,6 +85,6 @@ Camshift is not good for tracking vehicle due to the sunlight is too strong at d
 
 Problems:
 
-    1. Frame rate might be a problem.
+    1. May apply other image filters to increase the accuracy
+    2.
 
-    2. Strong sunlight will make some light color vehicle 'disappear'.
