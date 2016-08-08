@@ -39,7 +39,7 @@ def combined_nearby_centroid(centroid_pool):
             centroid_combined.append([centroid])
         for j in range(i, len(centroid_pool)):
             #if math.sqrt((centroid[0] - centroid_pool[j][0]) ** 2 + (centroid[1] - centroid_pool[j][1]) ** 2) <= 200: #abs(centroid[0] - centroid_pool[j][0]) < 90 and abs(centroid[1] - centroid_pool[j][1]) < 90:
-            if abs(centroid[0] - centroid_pool[j][0]) < 100 and abs(centroid[1] - centroid_pool[j][1]) < 60:    
+            if abs(centroid[0] - centroid_pool[j][0]) < 100 and abs(centroid[1] - centroid_pool[j][1]) < 40:    
                 for entry in centroid_combined:
                     if centroid in entry and centroid_pool[j] not in entry:
                         entry.append(centroid_pool[j])
@@ -47,8 +47,8 @@ def combined_nearby_centroid(centroid_pool):
 
 def detect_vehicles(fg_mask):
 
-    MIN_CONTOUR_WIDTH = 17
-    MIN_CONTOUR_HEIGHT = 17
+    MIN_CONTOUR_WIDTH = 15
+    MIN_CONTOUR_HEIGHT = 15
 
     # Find the contours of any vehicles in the image
     contours, hierarchy = cv2.findContours(fg_mask
@@ -89,6 +89,7 @@ def filter_mask(fg_mask):
     # Remove noise
     opening = cv2.morphologyEx(closing, cv2.MORPH_OPEN, kernel)
 
+    opening = cv2.morphologyEx(closing, cv2.MORPH_OPEN, kernel)
     # Dilate to merge adjacent blobs
     dilation = cv2.dilate(opening, kernel, iterations = 2)
 
@@ -131,27 +132,28 @@ def main():
 
     # Set up image source
 
-    cap = cv2.VideoCapture('flow.mp4')
-    
+    #cap = cv2.VideoCapture("midday_8.mp4")
+    cap = cv2.VideoCapture("rtsp://crtlabs:Abudabu1!@430n.crtlabs.org:554/videoMain")
     while True:
         ret, frame = cap.read()
         if not ret:
-            break
-        if car_counter is None:
-            # We do this here, so that we can initialize with actual frame size
-            #car_counter = VehicleCounter(frame.shape[:2], frame.shape[1] / 2)
-            car_counter = VehicleCounter(frame.shape[:2], frame.shape[1] / 2)
-            #print frame.shape
-        # Archive raw frames from video to disk for later inspection/testing
+            print 'failed'
+        else:
+            if car_counter is None:
+                # We do this here, so that we can initialize with actual frame size
+                #car_counter = VehicleCounter(frame.shape[:2], frame.shape[1] / 2)
+                car_counter = VehicleCounter(frame.shape[:2], frame.shape[1] / 2)
+                #print frame.shape
+            # Archive raw frames from video to disk for later inspection/testing
 
-        processed = process_frame(frame, bg_subtractor, car_counter)
+            processed = process_frame(frame, bg_subtractor, car_counter)
 
-        cv2.imshow('Source Image', frame)
-        cv2.imshow('Processed Image', processed)
+            cv2.imshow('Source Image', frame)
+            cv2.imshow('Processed Image', processed)
 
-        c = cv2.waitKey(100)
-        if c == 27:
-            break
+            c = cv2.waitKey(10)
+            if c == 27:
+                break
 
     cap.release()
     cv2.destroyAllWindows()
