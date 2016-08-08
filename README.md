@@ -87,6 +87,4 @@ Problems:
 
     1. Frame rate might be a problem.
 
-    2. Could not read the RTSP stream.
-
-    3. Strong sunlight will make some light color vehicle 'disappear'.
+    2. Strong sunlight will make some light color vehicle 'disappear'.
