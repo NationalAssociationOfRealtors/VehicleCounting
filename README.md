@@ -50,7 +50,7 @@ You definetly could install OpenCV from source, but it will be more complicated.
     
     `cd /Library/Python/2.7/site-packages/`
     
-    `ln -s /usr/local/Cellar/opencv3/3.1.0_3/lib/python2.7/site-packages/cv2.so cv2.so` (you may need `sudo`)
+    `ln -s /usr/local/Cellar/opencv/2.4.13/lib/python2.7/site-packages/cv2.so cv2.so` (you may need `sudo`)
     
     Then it's done!(I'm not sure if there are useless steps here, if so I'll update it)
     
