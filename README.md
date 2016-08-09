@@ -33,7 +33,7 @@ You definetly could install OpenCV from source, but it will be more complicated.
   3. Install numpy
   
     `brew install numpy`  or
-    
+  
     `brew install homebrew/python/numpy`
     
     then link numpy
@@ -52,9 +52,9 @@ You definetly could install OpenCV from source, but it will be more complicated.
     
     To test the installation:
     
-    `python`
-    `>>> import cv2`
-    `cv2.__version__`
+      `python`
+      `>>> import cv2`
+      `cv2.__version__`
     
     You could slso install OpenCV3 use `brew install opencv3`
   
