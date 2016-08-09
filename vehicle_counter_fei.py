@@ -17,6 +17,10 @@ class Vehicle(object):
         self.positions = [position]
         self.frames_since_seen = 0
         self.counted = False
+        self.counted2 = False
+        self.counted3 = False
+        self.counted4 = False
+        self.counted5 = False
 
     def add_position(self, new_position):
         self.positions.append(new_position)
@@ -37,10 +41,15 @@ class VehicleCounter(object):
 
         self.height, self.width = shape
         self.divider = divider
-
+        self.divider2 =  divider * 3 / 2 #frame.shape[1] / 3 * 2
+        self.divider3 = divider * 2
         self.vehicles = []
         self.next_vehicle_id = 0
         self.vehicle_count = 0
+        self.vehicle_count2 = 0
+        self.vehicle_count3 = 0
+        self.vehicle_count4 = 0
+        self.vehicle_count5 = 0
         self.max_unseen_frames = 3
 
 
@@ -116,13 +125,24 @@ class VehicleCounter(object):
 
         # Count any uncounted vehicles that are past the divider
         for vehicle in self.vehicles:
-            if not vehicle.counted and len(vehicle.positions) > 1 and ((vehicle.positions[-1][0] < self.divider and vehicle.positions[-2][0] >= self.divider) or (vehicle.positions[-1][0] > self.divider and vehicle.positions[-2][0] <= self.divider)):
-            #if not vehicle.counted and len(vehicle.positions) > 1 and (vehicle.last_position[0] > self.divider and vehicle.positions[-2][0] <= self.divider):
+            #if not vehicle.counted and len(vehicle.positions) > 1 and ((vehicle.positions[-1][0] < self.divider and vehicle.positions[-2][0] >= self.divider) or (vehicle.positions[-1][0] > self.divider and vehicle.positions[-2][0] <= self.divider)):
+            if not vehicle.counted and len(vehicle.positions) > 1 and (vehicle.positions[-1][0] > self.divider and vehicle.positions[-2][0] <= self.divider) and vehicle.positions[-1][1] > 270:
                 #print self.divider
                 #print vehicle.last_position
                 self.vehicle_count += 1
                 vehicle.counted = True
-
+            if not vehicle.counted2 and len(vehicle.positions) > 1 and (vehicle.positions[-1][0] > self.divider2 and vehicle.positions[-2][0] <= self.divider2) and vehicle.positions[-1][1] > 270:
+                self.vehicle_count2 += 1
+                vehicle.counted2 = True
+            if not vehicle.counted3 and len(vehicle.positions) > 1 and (vehicle.positions[-1][0] > self.divider3 and vehicle.positions[-2][0] <= self.divider3) and vehicle.positions[-1][1] > 270:
+                self.vehicle_count3 += 1
+                vehicle.counted3 = True
+            if not vehicle.counted4 and len(vehicle.positions) > 1 and (vehicle.positions[-1][0] < self.divider and vehicle.positions[-2][0] >= self.divider) and 270 > vehicle.positions[-1][1] > 140:
+                self.vehicle_count4 += 1
+                vehicle.counted4 = True
+            if not vehicle.counted5 and len(vehicle.positions) > 1 and (vehicle.positions[-1][0] < self.divider2 and vehicle.positions[-2][0] >= self.divider2) and 270 > vehicle.positions[-1][1] > 140:
+                self.vehicle_count5 += 1
+                vehicle.counted5 = True
         # Optionally draw the vehicles on an image
         if output_image is not None:
             for vehicle in self.vehicles:
@@ -130,7 +150,16 @@ class VehicleCounter(object):
 
             cv2.putText(output_image, ("%02d" % self.vehicle_count), (142, 10)
                 , cv2.FONT_HERSHEY_PLAIN, 0.7, (127, 255, 255), 1)
-
+            cv2.putText(output_image, ("%02d" % self.vehicle_count2), (242, 10)
+                , cv2.FONT_HERSHEY_PLAIN, 0.7, (127, 255, 255), 1)
+            cv2.putText(output_image, ("%02d" % self.vehicle_count3), (342, 10)
+                , cv2.FONT_HERSHEY_PLAIN, 0.7, (127, 255, 255), 1)
+            cv2.putText(output_image, ("%02d" % self.vehicle_count4), (442, 10)
+                , cv2.FONT_HERSHEY_PLAIN, 0.7, (127, 255, 255), 1)
+            cv2.putText(output_image, ("%02d" % self.vehicle_count5), (542, 10)
+                , cv2.FONT_HERSHEY_PLAIN, 0.7, (127, 255, 255), 1)
+            #cv2.putText(output_image, ("%02d" % ((self.vehicle_count + self.vehicle_count2) / 2)), (242, 10)
+            #    , cv2.FONT_HERSHEY_PLAIN, 0.7, (127, 255, 255), 1)
         # Remove vehicles that have not been seen long enough
         removed = [ v.id for v in self.vehicles
             if v.frames_since_seen >= self.max_unseen_frames ]
