@@ -16,9 +16,15 @@ You definetly could install OpenCV from source, but it will be more complicated.
     
     `brew install python`
     
-    Open up the `~/.bash_profile` file (if it does not exist, create it), and append the following
+    Open up the `~/.bash_profile` file 
+    
+    `cd ~`
 
-    lines to the file:
+    `open -e .bash_profile`
+
+    (if it does not exist, create it use `touch .bash_profile`)
+    
+    and append the following lines to the file:
     
     `export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH`
 
