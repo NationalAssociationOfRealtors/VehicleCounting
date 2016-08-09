@@ -87,7 +87,7 @@ def filter_mask(fg_mask):
     # Fill any small holes
     closing = cv2.morphologyEx(fg_mask, cv2.MORPH_CLOSE, kernel)
     # Remove noise
-    opening = cv2.morphologyEx(closing, cv2.MORPH_OPEN, kernel)
+    #opening = cv2.morphologyEx(closing, cv2.MORPH_OPEN, kernel)
 
     opening = cv2.morphologyEx(closing, cv2.MORPH_OPEN, kernel)
     # Dilate to merge adjacent blobs
@@ -103,8 +103,11 @@ def process_frame(frame, bg_subtractor, car_counter):
     processed = frame.copy()
 
     # Draw dividing line -- we count cars as they cross this line.
-    cv2.line(processed, (car_counter.divider, frame.shape[0]), (car_counter.divider, 40), DIVIDER_COLOUR, 1)
-
+    cv2.line(processed, (car_counter.divider, frame.shape[0]), (car_counter.divider, 290), DIVIDER_COLOUR, 1)
+    cv2.line(processed, (car_counter.divider2, frame.shape[0]), (car_counter.divider2, 290), DIVIDER_COLOUR, 1)
+    cv2.line(processed, (car_counter.divider3, frame.shape[0]), (car_counter.divider3, 290), DIVIDER_COLOUR, 1)
+    cv2.line(processed, (car_counter.divider, 250), (car_counter.divider, 140), DIVIDER_COLOUR, 1)
+    cv2.line(processed, (car_counter.divider2, 250), (car_counter.divider2, 140), DIVIDER_COLOUR, 1)
     # Remove the background
     fg_mask = bg_subtractor.apply(frame, None, 0.01)
     fg_mask = filter_mask(fg_mask)
@@ -122,17 +125,17 @@ def process_frame(frame, bg_subtractor, car_counter):
     car_counter.update_count(matches, processed)
 
     return processed
-
+    #return fg_mask
 # ============================================================================
 
 def main():
-    bg_subtractor = cv2.BackgroundSubtractorMOG()
+    bg_subtractor = cv2.BackgroundSubtractorMOG2()
 
     car_counter = None # Will be created after first frame is captured
 
     # Set up image source
 
-    #cap = cv2.VideoCapture("midday_8.mp4")
+    #cap = cv2.VideoCapture("flow.mp4")
     cap = cv2.VideoCapture("rtsp://crtlabs:Abudabu1!@430n.crtlabs.org:554/videoMain")
     while True:
         ret, frame = cap.read()
@@ -142,13 +145,13 @@ def main():
             if car_counter is None:
                 # We do this here, so that we can initialize with actual frame size
                 #car_counter = VehicleCounter(frame.shape[:2], frame.shape[1] / 2)
-                car_counter = VehicleCounter(frame.shape[:2], frame.shape[1] / 2)
+                car_counter = VehicleCounter(frame.shape[:2], frame.shape[1] / 3)
                 #print frame.shape
             # Archive raw frames from video to disk for later inspection/testing
 
             processed = process_frame(frame, bg_subtractor, car_counter)
 
-            cv2.imshow('Source Image', frame)
+            #cv2.imshow('Source Image', frame)
             cv2.imshow('Processed Image', processed)
 
             c = cv2.waitKey(10)
