@@ -52,9 +52,13 @@ You definetly could install OpenCV from source, but it will be more complicated.
     
     To test the installation:
     
-      `python`
-      `>>> import cv2`
-      `cv2.__version__`
+    `python`
+      
+    `>>> import cv2`
+      
+    `cv2.__version__`
+    
+    it should output '2.4.13'
     
     You could slso install OpenCV3 use `brew install opencv3`
   
