@@ -32,7 +32,9 @@ You definetly could install OpenCV from source, but it will be more complicated.
     
   3. Install numpy
   
-    `brew install numpy`
+    `brew install numpy`  or
+    
+    `brew install homebrew/python/numpy`
     
     then link numpy
 
@@ -46,13 +48,13 @@ You definetly could install OpenCV from source, but it will be more complicated.
     
     it is important to add the option `--with-ffmpeg --with-tbb` for decoding some format of video
     
-    then set up Python with OpenCV (if you use the system version of Python)
-    
-    `cd /Library/Python/2.7/site-packages/`
-    
-    `ln -s /usr/local/Cellar/opencv/2.4.13/lib/python2.7/site-packages/cv2.so cv2.so` (you may need `sudo`)
-    
     Then it's done!(I'm not sure if there are useless steps here, if so I'll update it)
+    
+    To test the installation:
+    
+    `python`
+    `>>> import cv2`
+    `cv2.__version__`
     
     You could slso install OpenCV3 use `brew install opencv3`
   
