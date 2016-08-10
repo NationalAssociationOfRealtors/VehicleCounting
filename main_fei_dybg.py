@@ -8,10 +8,20 @@ from vehicle_counter_fei import VehicleCounter
 
 # ============================================================================
 
+URL = 'rtsp://crtlabs:Abudabu1!@430n.crtlabs.org:554/videoMain'
+
 # Colours for drawing on processed frames    
 DIVIDER_COLOUR = (255, 255, 0)
 BOUNDING_BOX_COLOUR = (255, 0, 0)
 CENTROID_COLOUR = (0, 0, 255)
+
+# Set the 6 dividers, formed by 1_A and 1_B
+DIVIDER1 = (DIVIDER1_A, DIVIDER1_B) = ((length / 3, height), (length / 3, 290))
+DIVIDER2 = (DIVIDER2_A, DIVIDER2_B) = ((length / 2, height), (length / 2, 290))
+DIVIDER3 = (DIVIDER3_A, DIVIDER3_B) = ((length / 3 * 2, height), (length / 3 * 2, 290))
+DIVIDER4 = (DIVIDER4_A, DIVIDER4_B) = ((length / 3, 250), (length / 3, 140))
+DIVIDER5 = (DIVIDER5_A, DIVIDER5_B) = ((length / 2, 250), (length / 2, 140))
+DIVIDER6 = (DIVIDER6_A, DIVIDER6_B) = ((length / 3 * 2, 250), (length /3 * 2, 140))
 
 # ============================================================================
 
@@ -38,7 +48,6 @@ def combined_nearby_centroid(centroid_pool):
         if flag == 0:
             centroid_combined.append([centroid])
         for j in range(i, len(centroid_pool)):
-            #if math.sqrt((centroid[0] - centroid_pool[j][0]) ** 2 + (centroid[1] - centroid_pool[j][1]) ** 2) <= 200: #abs(centroid[0] - centroid_pool[j][0]) < 90 and abs(centroid[1] - centroid_pool[j][1]) < 90:
             if abs(centroid[0] - centroid_pool[j][0]) < 100 and abs(centroid[1] - centroid_pool[j][1]) < 40:    
                 for entry in centroid_combined:
                     if centroid in entry and centroid_pool[j] not in entry:
@@ -103,11 +112,13 @@ def process_frame(frame, bg_subtractor, car_counter):
     processed = frame.copy()
 
     # Draw dividing line -- we count cars as they cross this line.
-    cv2.line(processed, (car_counter.divider, frame.shape[0]), (car_counter.divider, 290), DIVIDER_COLOUR, 1)
-    cv2.line(processed, (car_counter.divider2, frame.shape[0]), (car_counter.divider2, 290), DIVIDER_COLOUR, 1)
-    cv2.line(processed, (car_counter.divider3, frame.shape[0]), (car_counter.divider3, 290), DIVIDER_COLOUR, 1)
-    cv2.line(processed, (car_counter.divider, 250), (car_counter.divider, 140), DIVIDER_COLOUR, 1)
-    cv2.line(processed, (car_counter.divider2, 250), (car_counter.divider2, 140), DIVIDER_COLOUR, 1)
+    cv2.line(processed, DIVIDER1_A, DIVIDER1_B, DIVIDER_COLOUR, 1)
+    cv2.line(processed, DIVIDER2_A, DIVIDER2_B, DIVIDER_COLOUR, 1)
+    cv2.line(processed, DIVIDER3_A, DIVIDER3_B, DIVIDER_COLOUR, 1)
+    cv2.line(processed, DIVIDER4_A, DIVIDER4_B, DIVIDER_COLOUR, 1)
+    cv2.line(processed, DIVIDER5_A, DIVIDER5_B, DIVIDER_COLOUR, 1)
+    cv2.line(processed, DIVIDER6_A, DIVIDER6_B, DIVIDER_COLOUR, 1)
+
     # Remove the background
     fg_mask = bg_subtractor.apply(frame, None, 0.01)
     fg_mask = filter_mask(fg_mask)
@@ -136,7 +147,7 @@ def main():
     # Set up image source
 
     #cap = cv2.VideoCapture("flow.mp4")
-    cap = cv2.VideoCapture("rtsp://crtlabs:Abudabu1!@430n.crtlabs.org:554/videoMain")
+    cap = cv2.VideoCapture(URL)
     while True:
         ret, frame = cap.read()
         if not ret:
@@ -145,7 +156,7 @@ def main():
             if car_counter is None:
                 # We do this here, so that we can initialize with actual frame size
                 #car_counter = VehicleCounter(frame.shape[:2], frame.shape[1] / 2)
-                car_counter = VehicleCounter(frame.shape[:2], frame.shape[1] / 3)
+                car_counter = VehicleCounter(frame.shape[:2], DIVIDER1, DIVIDER2, DIVIDER3, DIVIDER4, DIVIDER5, DIVIDER6)
                 #print frame.shape
             # Archive raw frames from video to disk for later inspection/testing
 
