@@ -15,6 +15,16 @@ DIVIDER_COLOUR = (255, 255, 0)
 BOUNDING_BOX_COLOUR = (255, 0, 0)
 CENTROID_COLOUR = (0, 0, 255)
 
+#Read one frame of the video to get the scale of the frame
+cap = cv2.VideoCapture(URL)
+while True:
+    ret, frame = cap.read()
+    break
+cap.release()
+
+height = frame.shape[0]
+length = frame.shape[1]
+
 # Set the 6 dividers, formed by 1_A and 1_B
 DIVIDER1 = (DIVIDER1_A, DIVIDER1_B) = ((length / 3, height), (length / 3, 290))
 DIVIDER2 = (DIVIDER2_A, DIVIDER2_B) = ((length / 2, height), (length / 2, 290))
