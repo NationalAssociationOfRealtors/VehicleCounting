@@ -40,7 +40,7 @@ class Vehicle(object):
 class VehicleCounter(object):
     def __init__(self, shape, divider1, divider2, divider3, divider4, divider5, divider6):
 
-        self.height, self.width = shape
+        #self.height, self.width = shape
 
         self.divider1a_x, self.divider1a_y = divider1[0][0], divider1[0][1]
         self.divider1b_x, self.divider1b_y = divider1[1][0], divider1[1][1]
@@ -137,23 +137,23 @@ class VehicleCounter(object):
 
         # Count any uncounted vehicles that are past the divider
         for vehicle in self.vehicles:
-            if not vehicle.counted1 and len(vehicle.positions) > 1 and (vehicle.positions[-1][0] > self.divider1a_x > vehicle.positions[-2][0]) and  self.divider1b_y > vehicle.positions[-1][1] > self.divider1a_y:
+            if not vehicle.counted1 and len(vehicle.positions) > 1 and (vehicle.positions[-1][0] > self.divider1a_x > vehicle.positions[-2][0]) and  self.divider1a_y > vehicle.positions[-1][1] > self.divider1b_y:
                 #print vehicle.last_position
                 self.vehicle_count1 += 1
                 vehicle.counted1 = True
-            if not vehicle.counted2 and len(vehicle.positions) > 1 and (vehicle.positions[-1][0] > self.divider2a_x > vehicle.positions[-2][0]) and self.divider1b_y > vehicle.positions[-1][1] > self.divider1a_y:
+            if not vehicle.counted2 and len(vehicle.positions) > 1 and (vehicle.positions[-1][0] > self.divider2a_x > vehicle.positions[-2][0]) and self.divider2a_y > vehicle.positions[-1][1] > self.divider2b_y:
                 self.vehicle_count2 += 1
                 vehicle.counted2 = True
-            if not vehicle.counted3 and len(vehicle.positions) > 1 and (vehicle.positions[-1][0] > self.divider3a_x > vehicle.positions[-2][0]) and self.divider1b_y > vehicle.positions[-1][1] > self.divider1a_y:
+            if not vehicle.counted3 and len(vehicle.positions) > 1 and (vehicle.positions[-1][0] > self.divider3a_x > vehicle.positions[-2][0]) and self.divider3a_y > vehicle.positions[-1][1] > self.divider3b_y:
                 self.vehicle_count3 += 1
                 vehicle.counted3 = True
-            if not vehicle.counted4 and len(vehicle.positions) > 1 and (vehicle.positions[-1][0] < self.divider4a_x > vehicle.positions[-2][0]) and self.divider1b_y > vehicle.positions[-1][1] > self.divider1a_y:
+            if not vehicle.counted4 and len(vehicle.positions) > 1 and (vehicle.positions[-1][0] < self.divider4a_x < vehicle.positions[-2][0]) and self.divider4a_y > vehicle.positions[-1][1] > self.divider4b_y:
                 self.vehicle_count4 += 1
                 vehicle.counted4 = True
-            if not vehicle.counted5 and len(vehicle.positions) > 1 and (vehicle.positions[-1][0] < self.divider5a_x > vehicle.positions[-2][0]) and self.divider1b_y > vehicle.positions[-1][1] > self.divider1a_y:
+            if not vehicle.counted5 and len(vehicle.positions) > 1 and (vehicle.positions[-1][0] < self.divider5a_x < vehicle.positions[-2][0]) and self.divider5a_y > vehicle.positions[-1][1] > self.divider5b_y:
                 self.vehicle_count5 += 1
                 vehicle.counted5 = True
-            if not vehicle.counted6 and len(vehicle.positions) > 1 and (vehicle.positions[-1][0] < self.divider6a_x > vehicle.positions[-2][0]) and self.divider1b_y > vehicle.positions[-1][1] > self.divider1a_y:
+            if not vehicle.counted6 and len(vehicle.positions) > 1 and (vehicle.positions[-1][0] < self.divider6a_x < vehicle.positions[-2][0]) and self.divider6a_y > vehicle.positions[-1][1] > self.divider6b_y:
                 self.vehicle_count6 += 1
                 vehicle.counted6 = True
         # Optionally draw the vehicles on an image
@@ -161,15 +161,17 @@ class VehicleCounter(object):
             for vehicle in self.vehicles:
                 vehicle.draw(output_image)
 
-            cv2.putText(output_image, ("%02d" % self.vehicle_count1), (142, 10)
+            cv2.putText(output_image, ("%02d" % self.vehicle_count1), (42, 10)
                 , cv2.FONT_HERSHEY_PLAIN, 0.7, (127, 255, 255), 1)
-            cv2.putText(output_image, ("%02d" % self.vehicle_count2), (242, 10)
+            cv2.putText(output_image, ("%02d" % self.vehicle_count2), (142, 10)
                 , cv2.FONT_HERSHEY_PLAIN, 0.7, (127, 255, 255), 1)
-            cv2.putText(output_image, ("%02d" % self.vehicle_count3), (342, 10)
+            cv2.putText(output_image, ("%02d" % self.vehicle_count3), (242, 10)
                 , cv2.FONT_HERSHEY_PLAIN, 0.7, (127, 255, 255), 1)
-            cv2.putText(output_image, ("%02d" % self.vehicle_count4), (442, 10)
+            cv2.putText(output_image, ("%02d" % self.vehicle_count4), (342, 10)
                 , cv2.FONT_HERSHEY_PLAIN, 0.7, (127, 255, 255), 1)
-            cv2.putText(output_image, ("%02d" % self.vehicle_count5), (542, 10)
+            cv2.putText(output_image, ("%02d" % self.vehicle_count5), (442, 10)
+                , cv2.FONT_HERSHEY_PLAIN, 0.7, (127, 255, 255), 1)
+            cv2.putText(output_image, ("%02d" % self.vehicle_count6), (542, 10)
                 , cv2.FONT_HERSHEY_PLAIN, 0.7, (127, 255, 255), 1)
             #cv2.putText(output_image, ("%02d" % ((self.vehicle_count + self.vehicle_count2) / 2)), (242, 10)
             #    , cv2.FONT_HERSHEY_PLAIN, 0.7, (127, 255, 255), 1)
