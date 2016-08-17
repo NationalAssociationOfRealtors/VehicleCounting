@@ -89,7 +89,7 @@ You definetly could install OpenCV from source, but it will be more complicated.
   
   7.For each vehicle, detect whether it crossed the target line.
  
-Simply run main_fei_dybg.py.
+Simply run main.py.
 
 ...
 
