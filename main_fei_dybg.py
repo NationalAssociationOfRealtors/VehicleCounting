@@ -10,7 +10,7 @@ from vehicle_counter_fei import VehicleCounter
 
 URL = 'rtsp://crtlabs:Abudabu1!@430n.crtlabs.org:554/videoMain'
 
-# Colours for drawing on processed frames    
+# Colours for drawing on processed frames
 DIVIDER_COLOUR = (255, 255, 0)
 BOUNDING_BOX_COLOUR = (255, 0, 0)
 CENTROID_COLOUR = (0, 0, 255)
@@ -19,19 +19,27 @@ CENTROID_COLOUR = (0, 0, 255)
 cap = cv2.VideoCapture(URL)
 while True:
     ret, frame = cap.read()
-    break
+    if ret:
+        height = frame.shape[0]
+        length = frame.shape[1]
+        break
+    else:
+        print 'no frame'
 cap.release()
 
-height = frame.shape[0]
-length = frame.shape[1]
+#height = frame.shape[0]
+#length = frame.shape[1]
 
 # Set the 6 dividers, formed by 1_A and 1_B
 DIVIDER1 = (DIVIDER1_A, DIVIDER1_B) = ((length / 3, height), (length / 3, 290))
 DIVIDER2 = (DIVIDER2_A, DIVIDER2_B) = ((length / 2, height), (length / 2, 290))
 DIVIDER3 = (DIVIDER3_A, DIVIDER3_B) = ((length / 3 * 2, height), (length / 3 * 2, 290))
-DIVIDER4 = (DIVIDER4_A, DIVIDER4_B) = ((length / 3, 250), (length / 3, 140))
-DIVIDER5 = (DIVIDER5_A, DIVIDER5_B) = ((length / 2, 250), (length / 2, 140))
-DIVIDER6 = (DIVIDER6_A, DIVIDER6_B) = ((length / 3 * 2, 250), (length /3 * 2, 140))
+DIVIDER4 = (DIVIDER4_A, DIVIDER4_B) = ((length / 6, 250), (length / 6, 140))
+DIVIDER5 = (DIVIDER5_A, DIVIDER5_B) = ((length / 3, 250), (length / 3, 140))
+DIVIDER6 = (DIVIDER6_A, DIVIDER6_B) = ((length / 5 * 4, 250), (length / 5 * 4, 140))
+#DIVIDER4 = (DIVIDER4_A, DIVIDER4_B) = ((length / 3, 250), (length / 3, 140))
+#DIVIDER5 = (DIVIDER5_A, DIVIDER5_B) = ((length / 2, 250), (length / 2, 140))
+#DIVIDER6 = (DIVIDER6_A, DIVIDER6_B) = ((length / 3 * 2, 250), (length /3 * 2, 140))
 
 # ============================================================================
 
@@ -136,6 +144,9 @@ def process_frame(frame, bg_subtractor, car_counter):
     matches = detect_vehicles(fg_mask)
 
     for (i, match) in enumerate(matches):
+        
+
+
         centroid = match
 
         # Mark the bounding box and the centroid on the processed frame
