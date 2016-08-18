@@ -4,7 +4,7 @@ import math
 import cv2
 import numpy as np
 
-from vehicle_counter_fei import VehicleCounter
+from vehicle_counter import VehicleCounter
 
 # ============================================================================
 
