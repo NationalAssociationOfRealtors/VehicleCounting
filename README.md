@@ -80,9 +80,25 @@ You definetly could install OpenCV from source, but it will be more complicated.
   1. Update installed packages
     
     `sudo apt-get update`
-    `sudo apt-get upgrade`
-    `sudo rpi-update`
 
+    `sudo apt-get upgrade`
+    
+    `sudo rpi-update`
+  
+  2. Install OpenCV
+    
+    `sudo apt-get install libopencv-dev python-opencv`
+
+    If you want the latest version of OpenCV you should make it from source. (but I'm lazy :)
+  
+    To test the installation:
+    
+    `python`
+    
+    `>>> import cv2`
+    
+    `>>> cv2.__version__`
+    
 # Main steps of the image processing:
 
   1.Read the video frame by frame.
