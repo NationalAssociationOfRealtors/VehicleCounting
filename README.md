@@ -2,7 +2,9 @@
 
 Using OpenCV to detect and count moving vehicles.
 
-# Prepare(install OpenCV for OS X)
+# Prepare
+
+# Install OpenCV for OS X
 
 You definetly could install OpenCV from source, but it will be more complicated. Using homebrew is a seay way to go.
 
@@ -72,6 +74,14 @@ You definetly could install OpenCV from source, but it will be more complicated.
     `ln -s -f /usr/local/Cellar/opencv/2.4.13/lib/python2.7/site-packages/cv2.so /usr/local/lib/python2.7/site-packages/cv2.so`
 
     you may need `sudo`
+
+# Install OpenCV for a Raspberry system
+
+  1. Update installed packages
+    
+    `sudo apt-get update`
+    `sudo apt-get upgrade`
+    `sudo rpi-update`
 
 # Main steps of the image processing:
 
