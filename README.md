@@ -127,3 +127,5 @@ Problems:
     2.
 
 The accuracy of the near lane is around 95 - 100 %, the further lane's accuracy is lower due to the shelter effect.
+
+Usefull links: https://www.learnopencv.com/how-to-find-frame-rate-or-frames-per-second-fps-in-opencv-python-cpp/
