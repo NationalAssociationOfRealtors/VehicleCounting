@@ -121,6 +121,10 @@ Simply run main.py.
 
 Camshift is not good for tracking vehicle due to the sunlight is too strong at day time.
 
+Increase the performace:
+
+  http://www.pyimagesearch.com/2015/12/21/increasing-webcam-fps-with-python-and-opencv/
+
 Problems:
 
     1. May apply other image filters to increase the accuracy
