@@ -128,7 +128,7 @@ Increase the performace:
 Problems:
 
     1. May apply other image filters to increase the accuracy
-    2.
+    2. To enhance the performance on pi: resize the size of frames, use multithread...
 
 The accuracy of the near lane is around 95 - 100 %, the further lane's accuracy is lower due to the shelter effect.
 
