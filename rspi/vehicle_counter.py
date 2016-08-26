@@ -105,12 +105,12 @@ class VehicleCounter(object):
         #return (distance <= threshold_distance)
         return distance <= int(45 * k)
 
-    def update_vehicle(self, vehicle, matches):
+    def update_vehicle(self, vehicle, matches, k):
         # Find if any of the matches fits this vehicle
         for i, match in enumerate(matches):
             centroid = match
             vector = self.get_vector(vehicle.positions[-1], centroid)
-            if self.is_valid_vector(vector, K):
+            if self.is_valid_vector(vector, k):
                 vehicle.add_position(centroid)
                 return i
 
@@ -120,11 +120,11 @@ class VehicleCounter(object):
         return None
 
 
-    def update_count(self, matches, output_image = None):
+    def update_count(self, matches, k, output_image = None):
 
         # First update all the existing vehicles
         for vehicle in self.vehicles:
-            i = self.update_vehicle(vehicle, matches)
+            i = self.update_vehicle(vehicle, matches, k)
             if i is not None:
                 del matches[i]
 
