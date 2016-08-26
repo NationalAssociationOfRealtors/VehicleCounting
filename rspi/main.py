@@ -15,12 +15,15 @@ DIVIDER_COLOUR = (255, 255, 0)
 BOUNDING_BOX_COLOUR = (255, 0, 0)
 CENTROID_COLOUR = (0, 0, 255)
 
-#Read one frame of the video to get the scale of the frame
+# Set the percentage of the resizing
+K = 0.5
+
+# Read one frame of the video to get the scale of the frame
 cap = cv2.VideoCapture(URL)
 while True:
     ret, frame = cap.read()
     if ret:
-        frame = cv2.resize(frame, (0, 0), fx = 0.5, fy = 0.5)
+        frame = cv2.resize(frame, (0, 0), fx = K, fy = K)
         height = frame.shape[0]
         length = frame.shape[1]
         print height, length
@@ -29,19 +32,18 @@ while True:
         print 'no frame'
 cap.release()
 
+
 #height = frame.shape[0]
 #length = frame.shape[1]
 
 # Set the 6 dividers, formed by 1_A and 1_B
-DIVIDER1 = (DIVIDER1_A, DIVIDER1_B) = ((length / 3, height), (length / 3, 290))
-DIVIDER2 = (DIVIDER2_A, DIVIDER2_B) = ((length / 2, height), (length / 2, 290))
-DIVIDER3 = (DIVIDER3_A, DIVIDER3_B) = ((length / 3 * 2, height), (length / 3 * 2, 290))
-DIVIDER4 = (DIVIDER4_A, DIVIDER4_B) = ((length / 6, 250), (length / 6, 140))
-DIVIDER5 = (DIVIDER5_A, DIVIDER5_B) = ((length / 3, 250), (length / 3, 140))
-DIVIDER6 = (DIVIDER6_A, DIVIDER6_B) = ((length / 5 * 4, 250), (length / 5 * 4, 140))
-#DIVIDER4 = (DIVIDER4_A, DIVIDER4_B) = ((length / 3, 250), (length / 3, 140))
-#DIVIDER5 = (DIVIDER5_A, DIVIDER5_B) = ((length / 2, 250), (length / 2, 140))
-#DIVIDER6 = (DIVIDER6_A, DIVIDER6_B) = ((length / 3 * 2, 250), (length /3 * 2, 140))
+DIVIDER1 = (DIVIDER1_A, DIVIDER1_B) = ((length / 3, height), (length / 3, int(290 * K)))
+DIVIDER2 = (DIVIDER2_A, DIVIDER2_B) = ((length / 2, height), (length / 2, int(290 * K)))
+DIVIDER3 = (DIVIDER3_A, DIVIDER3_B) = ((length / 3 * 2, height), (length / 3 * 2, int(290 * K)))
+DIVIDER4 = (DIVIDER4_A, DIVIDER4_B) = ((length / 6, int(250 * K)), (length / 6, int(140 * K)))
+DIVIDER5 = (DIVIDER5_A, DIVIDER5_B) = ((length / 3, int(250 * K)), (length / 3, int(140 * K)))
+DIVIDER6 = (DIVIDER6_A, DIVIDER6_B) = ((length / 5 * 4, int(250 * K)), (length / 5 * 4, int(140 * K)))
+
 
 # ============================================================================
 
@@ -68,7 +70,7 @@ def combined_nearby_centroid(centroid_pool):
         if flag == 0:
             centroid_combined.append([centroid])
         for j in range(i, len(centroid_pool)):
-            if abs(centroid[0] - centroid_pool[j][0]) < 100 and abs(centroid[1] - centroid_pool[j][1]) < 40:    
+            if abs(centroid[0] - centroid_pool[j][0]) < int(100 * K) and abs(centroid[1] - centroid_pool[j][1]) < int(40 * K):    
                 for entry in centroid_combined:
                     if centroid in entry and centroid_pool[j] not in entry:
                         entry.append(centroid_pool[j])
@@ -76,8 +78,8 @@ def combined_nearby_centroid(centroid_pool):
 
 def detect_vehicles(fg_mask):
 
-    MIN_CONTOUR_WIDTH = 15
-    MIN_CONTOUR_HEIGHT = 15
+    MIN_CONTOUR_WIDTH = 15 * K 
+    MIN_CONTOUR_HEIGHT = 15 * K
 
     # Find the contours of any vehicles in the image
     contours, hierarchy = cv2.findContours(fg_mask
@@ -176,7 +178,7 @@ def main():
         if not ret:
             print 'failed'
         else:
-            frame = cv2.resize(frame, (0, 0), fx = 0.5, fy = 0.5)
+            frame = cv2.resize(frame, (0, 0), fx = K, fy = K)
             if car_counter is None:
                 # We do this here, so that we can initialize with actual frame size
                 #car_counter = VehicleCounter(frame.shape[:2], frame.shape[1] / 2)
@@ -186,12 +188,12 @@ def main():
 
             processed = process_frame(frame, bg_subtractor, car_counter)
 
-            cv2.imshow('Source Image', frame)
-            cv2.imshow('Processed Image', processed)
+            # cv2.imshow('Source Image', frame)
+            # cv2.imshow('Processed Image', processed)
 
-            c = cv2.waitKey(10)
-            if c == 27:
-                break
+            # c = cv2.waitKey(10)
+            # if c == 27:
+            #     break
 
     cap.release()
     cv2.destroyAllWindows()

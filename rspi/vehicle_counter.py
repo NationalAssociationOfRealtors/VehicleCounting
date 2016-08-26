@@ -99,18 +99,18 @@ class VehicleCounter(object):
 
 
     @staticmethod
-    def is_valid_vector(a):
+    def is_valid_vector(a, k):
         distance, angle = a
         #threshold_distance = max(10.0, -0.008 * angle**2 + 0.4 * angle + 25.0)
         #return (distance <= threshold_distance)
-        return distance <= 45
+        return distance <= int(45 * k)
 
     def update_vehicle(self, vehicle, matches):
         # Find if any of the matches fits this vehicle
         for i, match in enumerate(matches):
             centroid = match
             vector = self.get_vector(vehicle.positions[-1], centroid)
-            if self.is_valid_vector(vector):
+            if self.is_valid_vector(vector, K):
                 vehicle.add_position(centroid)
                 return i
 
