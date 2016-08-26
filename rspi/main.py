@@ -128,7 +128,7 @@ def filter_mask(fg_mask):
 
 # ============================================================================
 
-def process_frame(frame, bg_subtractor, car_counter):
+def process_frame(frame, bg_subtractor, car_counter, k):
 
     # Create a copy of source frame to draw into
     processed = frame.copy()
@@ -158,7 +158,7 @@ def process_frame(frame, bg_subtractor, car_counter):
         #cv2.rectangle(processed, (x, y), (x + w - 1, y + h - 1), BOUNDING_BOX_COLOUR, 1)
         cv2.circle(processed, centroid, 2, CENTROID_COLOUR, -1)
 
-    car_counter.update_count(matches, processed)
+    car_counter.update_count(matches, k, processed)
 
     return processed
     #return fg_mask
@@ -186,9 +186,9 @@ def main():
                 #print frame.shape
             # Archive raw frames from video to disk for later inspection/testing
 
-            processed = process_frame(frame, bg_subtractor, car_counter)
+            processed = process_frame(frame, bg_subtractor, car_counter, K)
 
-            # cv2.imshow('Source Image', frame)
+            # #cv2.imshow('Source Image', frame)
             # cv2.imshow('Processed Image', processed)
 
             # c = cv2.waitKey(10)
