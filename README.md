@@ -129,7 +129,7 @@ Problems:
 
     1. May apply other image filters to increase the accuracy
     2. To enhance the performance on pi: resize the size of frames, use multiprocessing...
-    3. Multithread is not working on Python(espicially CPU bound programm), should use multiprocessing to get advantage of ulticore.
+    3. Multithread is not working on Python(espicially CPU bound program), should use multiprocessing to get advantage of ulticore.
 The accuracy of the near lane is around 95 - 100 %, the further lane's accuracy is lower due to the shelter effect.
 
 Usefull links: https://www.learnopencv.com/how-to-find-frame-rate-or-frames-per-second-fps-in-opencv-python-cpp/
